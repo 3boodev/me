@@ -16,6 +16,7 @@ class PersonalConfig {
     phone: '+20 (155) 225-2349',
     whatsapp: '+201552252349',
     website: 'https://3boodev.github.io/3boodeev/',
+    websiteTitle: 'My Portfolio',
   );
 
   /// Social platforms and contact methods

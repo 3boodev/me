@@ -9,6 +9,7 @@ class PersonalProfile {
   final String phone;
   final String? whatsapp;
   final String? website;
+  final String? websiteTitle;
 
   const PersonalProfile({
     required this.name,
@@ -17,6 +18,7 @@ class PersonalProfile {
     required this.phone,
     this.whatsapp,
     this.website,
+    this.websiteTitle,
   });
 
   /// Create a copy with updated fields
@@ -27,6 +29,7 @@ class PersonalProfile {
     String? phone,
     String? whatsapp,
     String? website,
+    String? websiteTitle,
   }) {
     return PersonalProfile(
       name: name ?? this.name,
@@ -35,6 +38,7 @@ class PersonalProfile {
       phone: phone ?? this.phone,
       whatsapp: whatsapp ?? this.whatsapp,
       website: website ?? this.website,
+      websiteTitle: websiteTitle ?? this.websiteTitle,
     );
   }
 }

@@ -145,6 +145,7 @@ class _ContactInfoItem extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     value,
+                    textDirection: TextDirection.ltr,
                     style: theme.textTheme.bodyMedium,
                   ),
                 ],

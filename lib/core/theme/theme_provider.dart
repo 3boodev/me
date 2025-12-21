@@ -76,7 +76,7 @@ final themeProvider = Provider<ThemeData>((ref) {
     case AppThemeMode.dark:
       return AppTheme.darkTheme;
     case AppThemeMode.system:
-      return AppTheme.lightTheme; // Default to light for system
+      return AppTheme.darkTheme; // Default to light for system
   }
 });
 
@@ -89,7 +89,7 @@ final brightnessProvider = Provider<Brightness>((ref) {
     case AppThemeMode.dark:
       return Brightness.dark;
     case AppThemeMode.system:
-      return Brightness.light; // Default to light for system
+      return Brightness.dark; // Default to light for system
   }
 });
 

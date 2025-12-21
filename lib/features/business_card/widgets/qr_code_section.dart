@@ -16,6 +16,7 @@ class QrCodeSection extends ConsumerWidget {
     final localizations = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final website = PersonalConfig.profile.website ?? '';
+    final websiteTitle = PersonalConfig.profile.websiteTitle ?? '';
 
     if (website.isEmpty) {
       return const SizedBox.shrink();
@@ -50,7 +51,7 @@ class QrCodeSection extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              website,
+              websiteTitle,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurface.withOpacity(0.7),
               ),
