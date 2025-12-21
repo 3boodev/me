@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/business_card/presentation/business_card_page.dart';
 import '../../features/settings/presentation/settings_page.dart';
+import '../widgets/app_shell.dart';
 
 /// Application route paths
 /// 
@@ -22,15 +23,22 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: AppRoutes.home,
     routes: [
-      GoRoute(
-        path: AppRoutes.home,
-        name: 'home',
-        builder: (context, state) => const BusinessCardPage(),
-      ),
-      GoRoute(
-        path: AppRoutes.settings,
-        name: 'settings',
-        builder: (context, state) => const SettingsPage(),
+      ShellRoute(
+        builder: (context, state, child) {
+          return AppShell(state: state, child: child);
+        },
+        routes: [
+          GoRoute(
+            path: AppRoutes.home,
+            name: 'home',
+            builder: (context, state) => const BusinessCardPage(),
+          ),
+          GoRoute(
+            path: AppRoutes.settings,
+            name: 'settings',
+            builder: (context, state) => const SettingsPage(),
+          ),
+        ],
       ),
     ],
   );

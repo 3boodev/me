@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import '../../../core/localization/app_localizations.dart';
 import '../../../core/localization/locale_provider.dart';
-import '../../../core/routing/app_router.dart';
 import '../../../core/theme/theme_provider.dart';
 
 /// Settings page for theme and language configuration
@@ -20,103 +18,94 @@ class SettingsPage extends ConsumerWidget {
     final themeMode = ref.watch(themeModeProvider);
     final locale = ref.watch(localeProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.settings),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go(AppRoutes.home),
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        // Theme Section
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  localizations.theme,
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _ThemeOption(
+                  title: localizations.lightMode,
+                  value: AppThemeMode.light,
+                  currentValue: themeMode,
+                  icon: Icons.light_mode,
+                  onChanged: (mode) {
+                    ref.read(themeModeProvider.notifier).setThemeMode(mode);
+                  },
+                ),
+                const Divider(),
+                _ThemeOption(
+                  title: localizations.darkMode,
+                  value: AppThemeMode.dark,
+                  currentValue: themeMode,
+                  icon: Icons.dark_mode,
+                  onChanged: (mode) {
+                    ref.read(themeModeProvider.notifier).setThemeMode(mode);
+                  },
+                ),
+                const Divider(),
+                _ThemeOption(
+                  title: localizations.systemMode,
+                  value: AppThemeMode.system,
+                  currentValue: themeMode,
+                  icon: Icons.brightness_auto,
+                  onChanged: (mode) {
+                    ref.read(themeModeProvider.notifier).setThemeMode(mode);
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          // Theme Section
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    localizations.theme,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _ThemeOption(
-                    title: localizations.lightMode,
-                    value: AppThemeMode.light,
-                    currentValue: themeMode,
-                    icon: Icons.light_mode,
-                    onChanged: (mode) {
-                      ref.read(themeModeProvider.notifier).setThemeMode(mode);
-                    },
-                  ),
-                  const Divider(),
-                  _ThemeOption(
-                    title: localizations.darkMode,
-                    value: AppThemeMode.dark,
-                    currentValue: themeMode,
-                    icon: Icons.dark_mode,
-                    onChanged: (mode) {
-                      ref.read(themeModeProvider.notifier).setThemeMode(mode);
-                    },
-                  ),
-                  const Divider(),
-                  _ThemeOption(
-                    title: localizations.systemMode,
-                    value: AppThemeMode.system,
-                    currentValue: themeMode,
-                    icon: Icons.brightness_auto,
-                    onChanged: (mode) {
-                      ref.read(themeModeProvider.notifier).setThemeMode(mode);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
+        const SizedBox(height: 16),
 
-          // Language Section
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    localizations.language,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+        // Language Section
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  localizations.language,
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 16),
-                  _LanguageOption(
-                    title: localizations.english,
-                    locale: AppLocales.english,
-                    currentLocale: locale,
-                    onChanged: (newLocale) {
-                      ref.read(localeProvider.notifier).setLocale(newLocale);
-                    },
-                  ),
-                  const Divider(),
-                  _LanguageOption(
-                    title: localizations.arabic,
-                    locale: AppLocales.arabic,
-                    currentLocale: locale,
-                    onChanged: (newLocale) {
-                      ref.read(localeProvider.notifier).setLocale(newLocale);
-                    },
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 16),
+                _LanguageOption(
+                  title: localizations.english,
+                  locale: AppLocales.english,
+                  currentLocale: locale,
+                  onChanged: (newLocale) {
+                    ref.read(localeProvider.notifier).setLocale(newLocale);
+                  },
+                ),
+                const Divider(),
+                _LanguageOption(
+                  title: localizations.arabic,
+                  locale: AppLocales.arabic,
+                  currentLocale: locale,
+                  onChanged: (newLocale) {
+                    ref.read(localeProvider.notifier).setLocale(newLocale);
+                  },
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

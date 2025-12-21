@@ -39,6 +39,7 @@ class AppLocalizations {
       'website': 'Website',
       'share': 'Share',
       'settings': 'Settings',
+      'home': 'Home',
       'theme': 'Theme',
       'language': 'Language',
       'light_mode': 'Light Mode',
@@ -60,6 +61,7 @@ class AppLocalizations {
       'website': 'الموقع الإلكتروني',
       'share': 'مشاركة',
       'settings': 'الإعدادات',
+      'home': 'الرئيسية',
       'theme': 'المظهر',
       'language': 'اللغة',
       'light_mode': 'الوضع الفاتح',
@@ -87,6 +89,7 @@ class AppLocalizations {
   String get website => _getLocalizedValue('website');
   String get share => _getLocalizedValue('share');
   String get settings => _getLocalizedValue('settings');
+  String get home => _getLocalizedValue('home');
   String get theme => _getLocalizedValue('theme');
   String get language => _getLocalizedValue('language');
   String get lightMode => _getLocalizedValue('light_mode');
