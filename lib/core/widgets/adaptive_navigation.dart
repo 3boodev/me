@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../responsive/responsive_layout.dart';
+import '../responsive/breakpoints.dart';
 
 /// A navigation widget that adapts to screen size.
 /// Uses a Drawer on mobile and a customized navigation solution for larger screens.
@@ -39,27 +40,20 @@ class AdaptiveNavigationScaffold extends StatelessWidget {
         title: Text(title),
         actions: actions,
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            DrawerHeader(child: Center(child: Text(title))),
-            ...destinations.asMap().entries.map((entry) {
-              final idx = entry.key;
-              final dest = entry.value;
-              return ListTile(
-                leading: dest.icon,
-                title: Text(dest.label),
-                selected: selectedIndex == idx,
-                onTap: () {
-                  onDestinationSelected(idx);
-                  Navigator.pop(context);
-                },
-              );
-            }),
-          ],
-        ),
-      ),
       body: body,
+      bottomNavigationBar: BottomNavigationBar(
+        items: destinations.map((d) {
+          return BottomNavigationBarItem(
+            icon: d.icon,
+            activeIcon: d.selectedIcon,
+            label: d.label,
+          );
+        }).toList(),
+        currentIndex: selectedIndex,
+        onTap: onDestinationSelected,
+        type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: true,
+      ),
       floatingActionButton: floatingActionButton,
     );
   }
